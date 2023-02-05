@@ -5,7 +5,9 @@ import {PORT} from './config.js'
 //export Models
 import  './database/models/user.Model.js';
 
-
+app.get('/hola', (req,res) => {
+  res.send("Hola Linduras locas");
+})
 
 app.listen(PORT, () => {
     console.log(`La app esta escuchando en el puerto: ${PORT}`);
