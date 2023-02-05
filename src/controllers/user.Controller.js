@@ -36,16 +36,18 @@ export const createUser = async (req,res) =>{
 
 };
 
-export const updateUser = async(req,res)=>{
+export const updateUser = async(req,res) =>{
     
     const {id} = req.params;
-    const {name} = req.body;
+    const {userName,email,password} = req.body;
 
     try{
 
        const updatedUser = await User.findByPk(id);
 
-       updatedUser.name = name;
+       updatedUser.userName = userName;
+       updatedUser.password = password;
+       updatedUser.email = email;
 
        await updatedUser.save();
 
@@ -59,7 +61,7 @@ export const updateUser = async(req,res)=>{
     }
 };
 
-export const deleteUser = async(req,res)=>{
+export const deleteUser = async(req,res) =>{
     
    try{
         const {id} = req.params;
@@ -81,12 +83,9 @@ export const deleteUser = async(req,res)=>{
 
 export const getUserById = async (req,res) =>{
 
-    debugger;
-
     const {id}  = req.params;
 
     try{
-
         const userById = await User.findByPk(id);
 
         res.json(userById);
@@ -96,6 +95,40 @@ export const getUserById = async (req,res) =>{
         return res.status(500).json({message:error.message});    
     }
 
-    
-
 };
+
+export const getUserByUserName = async (req,res) =>{
+    const {userName}  = req.params;
+
+    try{
+        const userByUserName = await User.findOne({
+            where : {
+                userName : userName
+            }
+        });
+
+        res.json(userByUserName);
+
+    }catch(error){
+
+        return res.status(500).json({message:error.message});    
+    }
+}
+
+export const getUserByEmail = async (req,res) =>{
+    const {email}  = req.params;
+
+    try{
+        const userByEmail = await User.findOne({
+            where : {
+                email : email
+            }
+        });
+
+        res.json(userByEmail);
+
+    }catch(error){
+
+        return res.status(500).json({message:error.message});    
+    }
+}
