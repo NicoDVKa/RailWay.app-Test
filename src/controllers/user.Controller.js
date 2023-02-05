@@ -19,11 +19,11 @@ export const getUser = async (req,res) =>{
 
 export const createUser = async (req,res) =>{
 
-    const {name}  = req.body;
+    const {userName,password,email}  = req.body;
 
     try{
         
-        const newUser = await User.create({name:name});
+        const newUser = await User.create({userName:userName,password:password,email:email});
 
         res.json(newUser);
 

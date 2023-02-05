@@ -3,7 +3,6 @@ import {getUser, createUser, updateUser, deleteUser, getUserById} from '../contr
 
 const router =  Router();
 
-
 router.get('/user',getUser);
 router.post('/user',createUser);
 router.put('/user/:id',updateUser);
